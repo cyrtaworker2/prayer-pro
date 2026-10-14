@@ -1,0 +1,1848 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prayer Now Pro | تتبع الصلاة، مصفوفة الالتزام (GitHub Heatmap)، وقضاء الفوائت</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #09101a;
+      --bg-secondary: #111d2e;
+      --bg-card: rgba(20, 34, 54, 0.78);
+      --bg-card-hover: rgba(28, 47, 74, 0.9);
+      --accent-emerald: #10b981;
+      --accent-emerald-dark: #059669;
+      --accent-gold: #f59e0b;
+      --accent-gold-light: #fbbf24;
+      --accent-cyan: #06b6d4;
+      --accent-purple: #8b5cf6;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --border-color: rgba(255, 255, 255, 0.08);
+      --border-gold: rgba(245, 158, 11, 0.35);
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --font-main: 'Tajawal', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-quran: 'Amiri', serif;
+
+      /* GitHub Heatmap Colors */
+      --gh-level-0: #161b22;
+      --gh-level-1: #0e4429;
+      --gh-level-2: #006d32;
+      --gh-level-3: #26a641;
+      --gh-level-4: #39d353;
+      --gh-level-5: #fbbf24; /* 5/5 with Jama'ah / Gold Crown */
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: var(--font-main);
+      background: radial-gradient(circle at 50% 0%, #152c47 0%, #09101a 75%);
+      color: var(--text-main);
+      min-height: 100vh;
+      line-height: 1.6;
+      overflow-x: hidden;
+      padding-bottom: 90px;
+      transition: background 0.6s ease;
+    }
+
+    .container {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 16px 20px;
+    }
+
+    /* Header */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 24px;
+      background: rgba(9, 16, 26, 0.88);
+      backdrop-filter: blur(14px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-logo {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--accent-emerald), var(--accent-emerald-dark));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 14px rgba(16, 185, 129, 0.4);
+      color: #fff;
+      font-size: 1.3rem;
+    }
+
+    .brand-title h1 {
+      font-size: 1.25rem;
+      font-weight: 800;
+      background: linear-gradient(90deg, #ffffff, var(--accent-gold-light));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .gh-badge {
+      font-size: 0.7rem;
+      background: rgba(16, 185, 129, 0.15);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      padding: 2px 8px;
+      border-radius: 12px;
+      -webkit-text-fill-color: #34d399;
+    }
+
+    .brand-title span {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      display: block;
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .btn-icon {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-size: 1.1rem;
+    }
+
+    .btn-icon:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--accent-emerald);
+      color: var(--accent-emerald);
+      transform: translateY(-2px);
+    }
+
+    /* Dynamic Hero Sky Banner */
+    .hero-banner {
+      background: linear-gradient(135deg, rgba(19, 36, 58, 0.92), rgba(10, 20, 34, 0.96));
+      border: 1px solid var(--border-gold);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      margin: 18px 0 22px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 12px 30px -5px rgba(0, 0, 0, 0.45);
+      transition: all 0.5s ease;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .hero-info h2 {
+      font-size: 2rem;
+      font-weight: 900;
+      color: #ffffff;
+      margin-bottom: 6px;
+      font-feature-settings: "tnum";
+    }
+
+    .sky-mood-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.82rem;
+      color: var(--accent-gold-light);
+      margin-bottom: 10px;
+      background: rgba(245, 158, 11, 0.12);
+      padding: 3px 12px;
+      border-radius: 20px;
+      border: 1px solid rgba(245, 158, 11, 0.25);
+    }
+
+    .hero-dates {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .date-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 4px 12px;
+      border-radius: 20px;
+      border: 1px solid var(--border-color);
+    }
+
+    .date-badge.hijri {
+      color: var(--accent-gold-light);
+      border-color: rgba(245, 158, 11, 0.3);
+      font-weight: 600;
+    }
+
+    .hero-next-prayer {
+      background: linear-gradient(145deg, rgba(16, 185, 129, 0.16), rgba(6, 182, 212, 0.1));
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      border-radius: var(--radius-md);
+      padding: 18px 26px;
+      text-align: center;
+      min-width: 250px;
+    }
+
+    .next-label {
+      font-size: 0.82rem;
+      color: var(--accent-emerald);
+      font-weight: 700;
+    }
+
+    .next-name {
+      font-size: 1.55rem;
+      font-weight: 800;
+      margin: 4px 0;
+    }
+
+    .countdown-timer {
+      font-size: 1.75rem;
+      font-weight: 900;
+      color: #ffffff;
+      font-feature-settings: "tnum";
+      letter-spacing: 1.5px;
+    }
+
+    /* Navigation Tabs */
+    .nav-tabs {
+      display: flex;
+      gap: 8px;
+      background: rgba(17, 29, 46, 0.75);
+      padding: 6px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-color);
+      margin-bottom: 24px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .nav-tabs::-webkit-scrollbar { display: none; }
+
+    .tab-btn {
+      flex: 1;
+      min-width: 125px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 14px;
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      border-radius: var(--radius-sm);
+      font-family: inherit;
+      font-size: 0.92rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      white-space: nowrap;
+    }
+
+    .tab-btn:hover {
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .tab-btn.active {
+      color: #ffffff;
+      background: linear-gradient(135deg, var(--accent-emerald), var(--accent-emerald-dark));
+      box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35);
+    }
+
+    .tab-pane {
+      display: none;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .tab-pane.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* EXCLUSIVE CREATIVE TOUCH: GitHub-Style Prayer Contribution Heatmap */
+    .github-heatmap-card {
+      background: #0d1117;
+      border: 1px solid #30363d;
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      margin-bottom: 24px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    }
+
+    .gh-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .gh-title {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: #e6edf3;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .gh-stats-badges {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .gh-stat-pill {
+      background: #161b22;
+      border: 1px solid #30363d;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      color: #8b949e;
+    }
+
+    .gh-stat-pill strong {
+      color: #39d353;
+      margin-right: 4px;
+    }
+
+    .heatmap-scroll {
+      overflow-x: auto;
+      padding-bottom: 8px;
+    }
+
+    .heatmap-grid {
+      display: grid;
+      grid-template-rows: repeat(7, 13px);
+      grid-auto-flow: column;
+      grid-auto-columns: 13px;
+      gap: 4px;
+      min-width: 680px;
+    }
+
+    .heatmap-cell {
+      width: 13px;
+      height: 13px;
+      border-radius: 3px;
+      background: var(--gh-level-0);
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      cursor: pointer;
+      transition: transform 0.15s ease;
+      position: relative;
+    }
+
+    .heatmap-cell:hover {
+      transform: scale(1.35);
+      z-index: 10;
+      border-color: #fff;
+    }
+
+    .heatmap-cell.lvl-1 { background: var(--gh-level-1); }
+    .heatmap-cell.lvl-2 { background: var(--gh-level-2); }
+    .heatmap-cell.lvl-3 { background: var(--gh-level-3); }
+    .heatmap-cell.lvl-4 { background: var(--gh-level-4); }
+    .heatmap-cell.lvl-5 { background: var(--gh-level-5); box-shadow: 0 0 6px rgba(251, 191, 36, 0.5); }
+
+    .gh-legend {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 12px;
+      font-size: 0.78rem;
+      color: #8b949e;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .gh-legend-scale {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    /* Daily Progress & Prayer Cards */
+    .daily-progress-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 18px 20px;
+      margin-bottom: 22px;
+    }
+
+    .progress-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .progress-bar-bg {
+      height: 10px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent-emerald), var(--accent-gold-light));
+      border-radius: 10px;
+      transition: width 0.4s ease;
+    }
+
+    .prayers-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(175px, 1fr));
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+
+    .prayer-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      transition: all 0.25s ease;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .prayer-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(16, 185, 129, 0.4);
+      background: var(--bg-card-hover);
+    }
+
+    .prayer-card.current {
+      border: 2px solid var(--accent-emerald);
+      box-shadow: 0 0 22px rgba(16, 185, 129, 0.22);
+    }
+
+    .prayer-card.current::before {
+      content: "الصلاة الحالية";
+      position: absolute;
+      top: -11px;
+      left: 12px;
+      background: var(--accent-emerald);
+      color: #042f1a;
+      font-size: 0.7rem;
+      font-weight: 800;
+      padding: 2px 8px;
+      border-radius: 10px;
+    }
+
+    .prayer-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .prayer-name { font-size: 1.12rem; font-weight: 700; }
+    .prayer-time {
+      font-size: 1.5rem;
+      font-weight: 800;
+      margin-bottom: 12px;
+      color: #fff;
+      font-feature-settings: "tnum";
+    }
+
+    .tracker-status-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .status-select-btn {
+      width: 100%;
+      padding: 7px 10px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-color);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text-muted);
+      font-family: inherit;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: all 0.2s ease;
+    }
+
+    .status-select-btn:hover { background: rgba(255, 255, 255, 0.09); color: #fff; }
+    .status-select-btn.done-ontime { background: rgba(16, 185, 129, 0.18); border-color: var(--accent-emerald); color: #34d399; }
+    .status-select-btn.done-jamaah { background: rgba(245, 158, 11, 0.2); border-color: var(--accent-gold); color: var(--accent-gold-light); }
+    .status-select-btn.done-late { background: rgba(6, 182, 212, 0.18); border-color: var(--accent-cyan); color: #38bdf8; }
+    .status-select-btn.not-done { background: rgba(239, 68, 68, 0.15); border-color: rgba(239, 68, 68, 0.45); color: #fca5a5; }
+
+    /* Qadaa (Missed Prayers) Section */
+    .qadaa-container {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+
+    .section-title-wrap {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .section-title {
+      font-size: 1.25rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .qadaa-planner-bar {
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      border-radius: var(--radius-md);
+      padding: 14px 18px;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .qadaa-metrics-overview {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 14px;
+      margin-bottom: 22px;
+    }
+
+    .metric-badge-box {
+      background: rgba(17, 29, 46, 0.9);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      text-align: center;
+    }
+
+    .metric-badge-box.highlight {
+      border-color: rgba(245, 158, 11, 0.4);
+      background: linear-gradient(145deg, rgba(245, 158, 11, 0.12), rgba(17, 29, 46, 0.9));
+    }
+
+    .metric-badge-box .num {
+      font-size: 1.85rem;
+      font-weight: 900;
+      color: #ffffff;
+      margin-top: 4px;
+      font-feature-settings: "tnum";
+    }
+
+    .metric-badge-box .desc {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    .qadaa-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(185px, 1fr));
+      gap: 16px;
+    }
+
+    .qadaa-card {
+      background: rgba(17, 29, 46, 0.92);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      text-align: center;
+      transition: all 0.2s ease;
+    }
+
+    .qadaa-card:hover { border-color: var(--accent-gold); }
+
+    .qadaa-counter-display {
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: var(--accent-gold-light);
+      margin: 8px 0;
+      font-feature-settings: "tnum";
+    }
+
+    .qadaa-controls {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .btn-step {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      border: none;
+      font-size: 1.35rem;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.15s ease;
+    }
+
+    .btn-step:active { transform: scale(0.92); }
+
+    .btn-minus {
+      background: rgba(239, 68, 68, 0.2);
+      color: #f87171;
+      border: 1px solid rgba(239, 68, 68, 0.4);
+    }
+    .btn-minus:hover { background: #ef4444; color: #fff; }
+
+    .btn-plus {
+      background: rgba(16, 185, 129, 0.2);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.4);
+    }
+    .btn-plus:hover { background: #10b981; color: #fff; }
+
+    .btn-batch {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    .btn-batch:hover { color: #fff; border-color: var(--accent-gold); }
+
+    /* Modals */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(5, 10, 18, 0.78);
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.3s ease;
+      padding: 16px;
+    }
+
+    .modal-overlay.show { opacity: 1; pointer-events: auto; }
+
+    .modal-card {
+      background: linear-gradient(135deg, #16273c 0%, #0d1724 100%);
+      border: 1px solid var(--border-gold);
+      border-radius: var(--radius-lg);
+      max-width: 550px;
+      width: 100%;
+      padding: 26px;
+      position: relative;
+      box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.65);
+      transform: scale(0.94);
+      transition: transform 0.25s ease;
+    }
+
+    .modal-overlay.show .modal-card { transform: scale(1); }
+
+    .modal-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(245, 158, 11, 0.15);
+      color: var(--accent-gold-light);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .modal-content-arabic {
+      font-family: var(--font-quran);
+      font-size: 1.45rem;
+      line-height: 2;
+      color: #ffffff;
+      text-align: center;
+      margin: 12px 0;
+      padding: 14px 16px;
+      background: rgba(0, 0, 0, 0.25);
+      border-radius: var(--radius-md);
+      border-right: 3px solid var(--accent-gold);
+    }
+
+    .modal-tafsir {
+      font-size: 0.88rem;
+      color: #cbd5e1;
+      background: rgba(255, 255, 255, 0.04);
+      padding: 10px 14px;
+      border-radius: 8px;
+      margin-bottom: 14px;
+    }
+
+    .modal-source {
+      text-align: left;
+      font-size: 0.85rem;
+      color: var(--accent-cyan);
+      font-weight: 600;
+      margin-bottom: 18px;
+    }
+
+    .modal-actions {
+      display: flex;
+      gap: 10px;
+      justify-content: flex-end;
+      flex-wrap: wrap;
+    }
+
+    .btn-action {
+      padding: 9px 16px;
+      border-radius: var(--radius-sm);
+      font-family: inherit;
+      font-size: 0.88rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border: none;
+      transition: all 0.2s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent-emerald), var(--accent-emerald-dark));
+      color: #ffffff;
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text-main);
+    }
+
+    .modal-close-x {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 1.4rem;
+      cursor: pointer;
+    }
+
+    /* Timetable & Tasbeeh & Compass */
+    .timetable-card, .tasbeeh-panel, .compass-container {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 22px;
+      margin-bottom: 24px;
+    }
+
+    .timetable-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: right;
+    }
+
+    .timetable-table th, .timetable-table td {
+      padding: 11px 12px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .timetable-table th { color: var(--accent-emerald); font-weight: 700; }
+
+    .tasbeeh-circle {
+      width: 170px;
+      height: 170px;
+      border-radius: 50%;
+      margin: 20px auto;
+      background: radial-gradient(circle, rgba(16, 185, 129, 0.18) 0%, rgba(17, 29, 46, 0.95) 100%);
+      border: 3px solid var(--accent-emerald);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      user-select: none;
+      box-shadow: 0 0 25px rgba(16, 185, 129, 0.22);
+      transition: transform 0.1s ease;
+    }
+
+    .tasbeeh-circle:active { transform: scale(0.94); border-color: var(--accent-gold); }
+    .tasbeeh-count { font-size: 2.7rem; font-weight: 900; color: #fff; }
+    .tasbeeh-phrase { font-family: var(--font-quran); font-size: 1.3rem; color: var(--accent-gold-light); margin-top: 8px; }
+
+    .tasbeeh-chips {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin: 14px 0;
+    }
+
+    .chip-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.84rem;
+      cursor: pointer;
+    }
+
+    .chip-btn.active { background: var(--accent-emerald-dark); border-color: var(--accent-emerald); color: #fff; }
+
+    .compass-dial {
+      width: 190px;
+      height: 190px;
+      border-radius: 50%;
+      border: 2px dashed rgba(255, 255, 255, 0.2);
+      margin: 20px auto;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .compass-pointer {
+      position: absolute;
+      width: 6px;
+      height: 86px;
+      background: linear-gradient(to top, transparent 50%, var(--accent-gold) 50%);
+      border-radius: 3px;
+    }
+
+    .compass-pointer::after {
+      content: "🕋";
+      position: absolute;
+      top: -24px;
+      left: -10px;
+      font-size: 20px;
+    }
+
+    .toast-box {
+      position: fixed;
+      bottom: 24px;
+      left: 24px;
+      background: rgba(17, 29, 46, 0.96);
+      border: 1px solid var(--border-gold);
+      border-radius: var(--radius-md);
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+      z-index: 500;
+      transform: translateY(130%);
+      transition: transform 0.3s ease;
+      max-width: 390px;
+    }
+
+    .toast-box.show { transform: translateY(0); }
+
+    .form-group { margin-bottom: 14px; text-align: right; }
+    .form-group label { display: block; font-size: 0.84rem; color: var(--text-muted); margin-bottom: 5px; }
+    .form-control {
+      width: 100%;
+      padding: 9px 12px;
+      background: #09101a;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      color: #fff;
+      font-family: inherit;
+    }
+
+    @media (max-width: 768px) {
+      .hero-grid { grid-template-columns: 1fr; }
+      .prayers-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 480px) {
+      .prayers-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="brand">
+      <div class="brand-logo">🕌</div>
+      <div class="brand-title">
+        <h1>
+          Prayer Now Pro
+          <span class="gh-badge">GitHub Edition ✨</span>
+        </h1>
+        <span>تتبع الصلاة • مصفوفة الالتزام الحرارية • قضاء الفوائت</span>
+      </div>
+    </div>
+
+    <div class="header-actions">
+      <button class="btn-icon" id="openKhushuBtn" title="وضع الخشوع والتركيز">🌙</button>
+      <button class="btn-icon" id="openVerseModalBtn" title="نفحة قرآنية أو حديث منبثق">📖</button>
+      <button class="btn-icon" id="toggleSoundBtn" title="تفعيل/كتم صوت التكبير">🔔</button>
+      <button class="btn-icon" id="openSettingsBtn" title="إعدادات الموقع والحساب">⚙️</button>
+    </div>
+  </header>
+
+  <div class="container">
+
+    <!-- Dynamic Sky Hero Banner -->
+    <div class="hero-banner" id="heroSkyBanner">
+      <div class="hero-grid">
+        <div class="hero-info">
+          <div class="sky-mood-label" id="skyMoodText">🌤️ أجواء وقت الظهيرة والعصر - حي على الفلاح</div>
+          <h2 id="currentClockDisplay">--:--:--</h2>
+          <div class="hero-dates">
+            <span class="date-badge" id="gregorianDate">الأربعاء، 14 أكتوبر 2026</span>
+            <span class="date-badge hijri" id="hijriDate">3 ربيع الآخر 1448 هـ</span>
+            <span class="date-badge" id="locationCityBadge">📍 سطيف، الجزائر</span>
+          </div>
+        </div>
+
+        <div class="hero-next-prayer">
+          <div class="next-label">الصلاة القادمة بعد</div>
+          <div class="next-name" id="nextPrayerName">صلاة العصر</div>
+          <div class="countdown-timer" id="nextPrayerCountdown">02:25:14</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation Tabs -->
+    <nav class="nav-tabs">
+      <button class="tab-btn active" data-tab="prayers">🕌 التتبع ومصفوفة GitHub</button>
+      <button class="tab-btn" data-tab="qadaa">🔄 قضاء الفوائت (+ / -)</button>
+      <button class="tab-btn" data-tab="schedule">📅 جدول الصلوات</button>
+      <button class="tab-btn" data-tab="tasbeeh">📿 السبحة الإلكترونية</button>
+      <button class="tab-btn" data-tab="qibla">🧭 بوصلة القبلة</button>
+    </nav>
+
+    <!-- TAB 1: Daily Tracker + GitHub Heatmap -->
+    <section class="tab-pane active" id="tab-prayers">
+
+      <!-- EXCLUSIVE CREATIVE TOUCH: GitHub-Style Prayer Contribution Heatmap -->
+      <div class="github-heatmap-card">
+        <div class="gh-header">
+          <div class="gh-title">
+            <svg width="20" height="20" viewBox="0 0 16 16" fill="#39d353">
+              <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+            </svg>
+            <span>مصفوفة الالتزام الإيماني (GitHub Prayer Heatmap)</span>
+          </div>
+          <div class="gh-stats-badges">
+            <span class="gh-stat-pill">السلسلة الحالية: <strong id="ghCurrentStreak">14 يوماً 🔥</strong></span>
+            <span class="gh-stat-pill">أعلى التزام: <strong id="ghBestStreak">29 يوماً 🏆</strong></span>
+            <span class="gh-stat-pill">تقييم اليوم: <strong id="ghTodayScore">0/5</strong></span>
+          </div>
+        </div>
+
+        <div class="heatmap-scroll">
+          <div class="heatmap-grid" id="githubHeatmapGrid"></div>
+        </div>
+
+        <div class="gh-legend">
+          <span id="heatmapHoverInfo">مرر المؤشر أو اضغط على أي مربع لعرض سجل صلوات ذلك اليوم</span>
+          <div class="gh-legend-scale">
+            <span>أقل</span>
+            <span class="heatmap-cell"></span>
+            <span class="heatmap-cell lvl-1"></span>
+            <span class="heatmap-cell lvl-2"></span>
+            <span class="heatmap-cell lvl-3"></span>
+            <span class="heatmap-cell lvl-4"></span>
+            <span class="heatmap-cell lvl-5" title="5 صلوات مع الجماعة (تاج ذهبي)"></span>
+            <span>أكثر (5/5 جماعة 🌟)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Daily Progress Bar -->
+      <div class="daily-progress-card">
+        <div class="progress-header">
+          <span style="font-weight: 700;">إنجاز الفروض اليومية (يتزامن فورياً مع مصفوفة GitHub وسجل الفوائت)</span>
+          <span style="font-weight: 800; color: var(--accent-emerald);" id="todayProgressRatio">0 من 5 صلوات</span>
+        </div>
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill" id="todayProgressBar" style="width: 0%;"></div>
+        </div>
+      </div>
+
+      <!-- Prayer Cards Grid -->
+      <div class="prayers-grid" id="prayersCardsContainer"></div>
+
+      <!-- Pop-up Inspiration Trigger Bar -->
+      <div style="background: rgba(19, 34, 53, 0.78); border: 1px dashed var(--border-gold); border-radius: var(--radius-md); padding: 16px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+        <div>
+          <strong style="color: var(--accent-gold-light);">✨ نفحة إيمانية منبثقة (آية وحديث وتفسير):</strong>
+          <span style="color: var(--text-muted); font-size: 0.88rem; margin-right: 6px;">اختر حالتك الروحية أو اعرض تذكيراً عشوائياً</span>
+        </div>
+        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+          <button class="btn-action btn-secondary" onclick="showVerseByCategory('motivation')">عند الفتور 💡</button>
+          <button class="btn-action btn-secondary" onclick="showVerseByCategory('qadaa')">فضل القضاء والتوبة 🌿</button>
+          <button class="btn-action btn-primary" id="btnShowInspireCard">نفحة منبثقة عشوائية 📖</button>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- TAB 2: Missed Prayers (Qadaa) with Interactive +/- and Smart Planner -->
+    <section class="tab-pane" id="tab-qadaa">
+      <div class="qadaa-container">
+        <div class="section-title-wrap">
+          <div class="section-title">🔄 سجل وحاسبة قضاء الصلوات الفائتة والمتبقية</div>
+          <div style="display: flex; gap: 8px;">
+            <button class="btn-action btn-secondary" id="btnAddFullMissedDay" title="إضافة يوم كامل (5 صلوات) إلى الفوائت">+ إضافة يوم كامل فائت</button>
+            <button class="btn-action btn-primary" id="btnCompleteFullDay" title="إنقاص يوم كامل (5 صلوات) بعد قضائها">✓ قضاء يوم كامل (-5)</button>
+            <button class="btn-action btn-secondary" id="btnResetQadaaModal">تصفير</button>
+          </div>
+        </div>
+
+        <!-- Smart Qadaa Planner (Creative Feature) -->
+        <div class="qadaa-planner-bar">
+          <div>
+            <strong style="color: #34d399;">🎯 خطة القضاء الذكية اليومية:</strong>
+            <span style="font-size: 0.86rem; color: var(--text-muted); margin-right: 6px;">حدد كم صلاة فائتة تقضيها يومياً لحساب تاريخ الختم بدقة:</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <select class="form-control" id="qadaaDailyTargetSelect" style="width: auto; padding: 6px 12px;">
+              <option value="5">5 صلوات يومياً (فرض مع كل صلاة)</option>
+              <option value="10">10 صلوات يومياً (فرضان مع كل صلاة)</option>
+              <option value="15">15 صلاة يومياً (3 فروض مع كل صلاة)</option>
+              <option value="2">صلاتان يومياً</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Metrics Overview -->
+        <div class="qadaa-metrics-overview">
+          <div class="metric-badge-box highlight">
+            <div class="desc">إجمالي الصلوات المتبقية للقضاء</div>
+            <div class="num" id="totalRemainingQadaa">0</div>
+          </div>
+          <div class="metric-badge-box">
+            <div class="desc">تم قضاؤه بفضل الله</div>
+            <div class="num" style="color: var(--accent-emerald);" id="totalDoneQadaa">0</div>
+          </div>
+          <div class="metric-badge-box">
+            <div class="desc">المدة المتبقية حسب خطتك</div>
+            <div class="num" style="font-size: 1.4rem; color: var(--accent-cyan);" id="estimatedFinishDays">-- يوماً</div>
+          </div>
+        </div>
+
+        <!-- Interactive +/- Cards Grid -->
+        <div class="qadaa-cards-grid" id="qadaaCardsGrid"></div>
+      </div>
+    </section>
+
+    <!-- TAB 3: Weekly Prayer Timetable -->
+    <section class="tab-pane" id="tab-schedule">
+      <div class="timetable-card">
+        <div class="section-title-wrap">
+          <div class="section-title">📅 جدول مواقيت الصلاة للأسبوع الجاري</div>
+          <div style="font-size: 0.85rem; color: var(--text-muted);" id="calculationMethodBadge">
+            الحساب الفلكي: وزارة الشؤون الدينية (الجزائر)
+          </div>
+        </div>
+
+        <table class="timetable-table">
+          <thead>
+            <tr>
+              <th>اليوم / التاريخ</th>
+              <th>الفجر</th>
+              <th>الشروق</th>
+              <th>الظهر</th>
+              <th>العصر</th>
+              <th>المغرب</th>
+              <th>العشاء</th>
+            </tr>
+          </thead>
+          <tbody id="scheduleTableBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- TAB 4: Smart Digital Tasbeeh -->
+    <section class="tab-pane" id="tab-tasbeeh">
+      <div class="tasbeeh-panel" style="text-align: center;">
+        <div class="section-title" style="justify-content: center; margin-bottom: 6px;">📿 المسبحة الإلكترونية التفاعلية</div>
+        <p style="color: var(--text-muted); font-size: 0.88rem;">اضغط على الدائرة للتسبيح مع اهتزاز تفاعلي وتنبيه عند كل 33 تسبيحة</p>
+
+        <div class="tasbeeh-chips">
+          <button class="chip-btn active" data-phrase="سُبْحَانَ اللَّهِ">سبحان الله</button>
+          <button class="chip-btn" data-phrase="الْحَمْدُ لِلَّهِ">الحمد لله</button>
+          <button class="chip-btn" data-phrase="اللَّهُ أَكْبَرُ">الله أكبر</button>
+          <button class="chip-btn" data-phrase="لَا إِلَهَ إِلَّا اللَّهُ">لا إله إلا الله</button>
+          <button class="chip-btn" data-phrase="أَسْتَغْفِرُ اللَّهَ وَأَتُوبُ إِلَيْهِ">أستغفر الله</button>
+          <button class="chip-btn" data-phrase="اللَّهُمَّ صَلِّ وَسَلِّمْ عَلَى نَبِيِّنَا مُحَمَّدٍ">الصلاة على النبي</button>
+        </div>
+
+        <div class="tasbeeh-circle" id="tasbeehTrigger">
+          <div class="tasbeeh-count" id="tasbeehCountDisplay">0</div>
+          <div class="tasbeeh-phrase" id="tasbeehCurrentPhrase">سُبْحَانَ اللَّهِ</div>
+        </div>
+
+        <div style="display: flex; justify-content: center; gap: 12px; margin-top: 12px;">
+          <button class="btn-action btn-secondary" id="btnResetTasbeeh">تصفير العداد</button>
+          <span class="date-badge" id="tasbeehSessionTotal">مجموع التسبيحات: 0</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 5: Qibla Compass -->
+    <section class="tab-pane" id="tab-qibla">
+      <div class="compass-container" style="text-align: center;">
+        <div class="section-title" style="justify-content: center; margin-bottom: 6px;">🧭 اتجاه القبلة المشرفة</div>
+        <p style="color: var(--text-muted); font-size: 0.88rem;">زاوية القبلة الفلكية الدقيقة من موقعك الحالي نحو الكعبة المشرفة</p>
+
+        <div class="compass-dial">
+          <div class="compass-pointer" id="compassNeedle"></div>
+        </div>
+
+        <strong style="color: var(--accent-gold-light); font-size: 1.35rem;" id="qiblaAngleText">105.4°</strong>
+        <div style="color: var(--text-muted); font-size: 0.85rem; margin-top: 4px;">من الشمال الحقيقي باتجاه عقارب الساعة</div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Pop-up Modal: Quran & Hadith with Tafsir -->
+  <div class="modal-overlay" id="verseModal">
+    <div class="modal-card">
+      <button class="modal-close-x" id="closeVerseModal">&times;</button>
+      <div class="modal-badge" id="modalContentTypeBadge">✨ آية قرآنية</div>
+      <div class="modal-content-arabic" id="modalTextArabic"></div>
+      <div class="modal-tafsir" id="modalTafsirText"></div>
+      <div class="modal-source" id="modalSourceText"></div>
+      <div class="modal-actions">
+        <button class="btn-action btn-secondary" id="btnNextVerse">نفحة أخرى ↻</button>
+        <button class="btn-action btn-primary" id="btnCopyVerse">نسخ مع التفسير 📋</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Khushu Focus Mode Modal -->
+  <div class="modal-overlay" id="khushuModal">
+    <div class="modal-card" style="text-align: center;">
+      <button class="modal-close-x" id="closeKhushuModal">&times;</button>
+      <div class="modal-badge">🌙 وضع الخشوع والسكينة</div>
+      <h3 style="margin-bottom: 10px;">أَرِحْنَا بِهَا يَا بِلَالُ</h3>
+      <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 18px;">
+        فرّغ قلبك من شواغل الدنيا، واستحضر عظمة الوقوف بين يدي الله عز وجل.
+      </p>
+      <div style="font-size: 2.4rem; font-weight: 900; color: var(--accent-emerald); margin: 16px 0;" id="khushuTimerDisplay">05:00</div>
+      <div class="modal-actions" style="justify-content: center;">
+        <button class="btn-action btn-primary" id="btnStartKhushuTimer">بدء جلسة أذكار بعد الصلاة (5 دقائق)</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Settings Modal -->
+  <div class="modal-overlay" id="settingsModal">
+    <div class="modal-card">
+      <button class="modal-close-x" id="closeSettingsModal">&times;</button>
+      <div class="modal-badge">⚙️ إعدادات الموقع وطريقة الحساب</div>
+      <div class="form-group">
+        <label>المدينة / الدولة</label>
+        <input type="text" class="form-control" id="settingCityName" value="سطيف، الجزائر">
+      </div>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+        <div class="form-group">
+          <label>خط العرض (Latitude)</label>
+          <input type="number" step="0.0001" class="form-control" id="settingLat" value="36.1911">
+        </div>
+        <div class="form-group">
+          <label>خط الطول (Longitude)</label>
+          <input type="number" step="0.0001" class="form-control" id="settingLng" value="5.4137">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>طريقة الحساب الفلكي</label>
+        <select class="form-control" id="settingMethod">
+          <option value="Algeria" selected>وزارة الشؤون الدينية والأوقاف (الجزائر)</option>
+          <option value="MWL">رابطة العالم الإسلامي (MWL)</option>
+          <option value="Makkah">تقويم أم القرى (مكة المكرمة)</option>
+          <option value="Egypt">الهيئة العامة المصرية للمساحة</option>
+          <option value="ISNA">الجمعية الإسلامية لأمريكا الشمالية (ISNA)</option>
+        </select>
+      </div>
+      <div class="modal-actions">
+        <button class="btn-action btn-secondary" id="btnUseGPS">تحديد موقعي تلقائياً 🛰️</button>
+        <button class="btn-action btn-primary" id="btnSaveSettings">حفظ وتحديث</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="toast-box" id="toastBox">
+    <span style="font-size: 1.4rem;">🕌</span>
+    <div>
+      <strong id="toastTitle">تذكير الصلاة</strong>
+      <div style="font-size: 0.84rem; color: var(--text-muted);" id="toastMessage"></div>
+    </div>
+  </div>
+
+  <script>
+    const PRAYER_NAMES = [
+      { id: 'fajr', ar: 'الفجر', icon: '🌅' },
+      { id: 'sunrise', ar: 'الشروق', icon: '☀️' },
+      { id: 'dhuhr', ar: 'الظهر', icon: '🌞' },
+      { id: 'asr', ar: 'العصر', icon: '🌤️' },
+      { id: 'maghrib', ar: 'المغرب', icon: '🌇' },
+      { id: 'isha', ar: 'العشاء', icon: '🌙' }
+    ];
+
+    const QADAA_KEYS = [
+      { id: 'fajr', ar: 'صلاة الفجر' },
+      { id: 'dhuhr', ar: 'صلاة الظهر' },
+      { id: 'asr', ar: 'صلاة العصر' },
+      { id: 'maghrib', ar: 'صلاة المغرب' },
+      { id: 'isha', ar: 'صلاة العشاء' },
+      { id: 'witr', ar: 'صلاة الوتر' }
+    ];
+
+    const INSPIRATIONAL_QUOTES = [
+      {
+        type: 'آية قرآنية',
+        category: 'general',
+        text: 'إِنَّ الصَّلَاةَ كَانَتْ عَلَى الْمُؤْمِنِينَ كِتَابًا مَّوْقُوتًا',
+        tafsir: 'أي مفروضاً في أوقات محددة لا يجوز تأخيرها عنها بغير عذر شرعي.',
+        source: 'سورة النساء - الآية 103'
+      },
+      {
+        type: 'حديث نبوي',
+        category: 'motivation',
+        text: 'مَنْ صَلَّى الْبَرْدَيْنِ دَخَلَ الْجَنَّةَ',
+        tafsir: 'البردان هما صلاة الفجر وصلاة العصر؛ لمشقة القيام في الفجر والانشغال في العصر.',
+        source: 'متفق عليه (البخاري ومسلم)'
+      },
+      {
+        type: 'آية قرآنية',
+        category: 'qadaa',
+        text: 'وَأَقِمِ الصَّلَاةَ طَرَفَيِ النَّهَارِ وَزُلَفًا مِّنَ اللَّيْلِ ۚ إِنَّ الْحَسَنَاتِ يُذْهِبْنَ السَّيِّئَاتِ',
+        tafsir: 'بشارة لكل من يجتهد في تدارك ما فاته؛ فإقامة الصلاة تكفّر ما سلف من التقصير.',
+        source: 'سورة هود - الآية 114'
+      },
+      {
+        type: 'حديث نبوي',
+        category: 'qadaa',
+        text: 'مَنْ نَسِيَ صَلَاةً أَوْ نَامَ عَنْهَا فَكَفَّارَتُهَا أَنْ يُصَلِّيَهَا إِذَا ذَكَرَهَا',
+        tafsir: 'وجوب المبادرة بقضاء الفوائت فور تذكرها والقدرة عليها دون تكاسل.',
+        source: 'صحيح مسلم'
+      },
+      {
+        type: 'حديث نبوي',
+        category: 'motivation',
+        text: 'أَقْرَبُ مَا يَكُونُ الْعَبْدُ مِنْ رَبِّهِ وَهُوَ سَاجِدٌ فَأَكْثِرُوا الدُّعَاءَ',
+        tafsir: 'كل سجدة تسجدها ترفعك درجة وتحط عنك خطيئة وتقربك من الملك جل جلاله.',
+        source: 'صحيح مسلم'
+      }
+    ];
+
+    let appSettings = {
+      city: 'سطيف، الجزائر',
+      lat: 36.1911,
+      lng: 5.4137,
+      method: 'Algeria',
+      soundEnabled: true,
+      dailyQadaaTarget: 5
+    };
+
+    let qadaaData = {
+      remaining: { fajr: 10, dhuhr: 5, asr: 8, maghrib: 4, isha: 7, witr: 3 },
+      completed: { fajr: 3, dhuhr: 2, asr: 4, maghrib: 2, isha: 3, witr: 1 }
+    };
+
+    let todayTracker = {};
+    let tasbeehData = { count: 0, total: 0, phrase: 'سُبْحَانَ اللَّهِ' };
+    let currentPrayerTimes = null;
+    let currentQuoteIndex = 0;
+
+    function loadState() {
+      try {
+        const s = localStorage.getItem('pn_pro_settings');
+        if (s) appSettings = Object.assign(appSettings, JSON.parse(s));
+        const q = localStorage.getItem('pn_pro_qadaa');
+        if (q) qadaaData = Object.assign(qadaaData, JSON.parse(q));
+        const t = localStorage.getItem('pn_pro_tracker');
+        if (t) todayTracker = JSON.parse(t);
+        const tb = localStorage.getItem('pn_pro_tasbeeh');
+        if (tb) tasbeehData = Object.assign(tasbeehData, JSON.parse(tb));
+      } catch (e) {}
+    }
+
+    function saveState() {
+      try {
+        localStorage.setItem('pn_pro_settings', JSON.stringify(appSettings));
+        localStorage.setItem('pn_pro_qadaa', JSON.stringify(qadaaData));
+        localStorage.setItem('pn_pro_tracker', JSON.stringify(todayTracker));
+        localStorage.setItem('pn_pro_tasbeeh', JSON.stringify(tasbeehData));
+      } catch (e) {}
+    }
+
+    // Offline Astronomical Calculation
+    class SunCalc {
+      static toRad(deg) { return (deg * Math.PI) / 180; }
+      static toDeg(rad) { return (rad * 180) / Math.PI; }
+
+      static calculateTimes(date, lat, lng, tz, method) {
+        const d = new Date(date);
+        const dayOfYear = Math.floor((d - new Date(d.getFullYear(), 0, 0)) / 86400000);
+        const b = (2 * Math.PI * (dayOfYear - 81)) / 365;
+        const eot = 9.87 * Math.sin(2 * b) - 7.53 * Math.cos(b) - 1.5 * Math.sin(b);
+        const dec = 23.45 * Math.sin(SunCalc.toRad((360 / 365) * (dayOfYear - 81)));
+        const solarNoon = 12 + (tz - lng / 15) - eot / 60;
+
+        let fajrAngle = 18, ishaAngle = 17;
+        if (method === 'Egypt') { fajrAngle = 19.5; ishaAngle = 17.5; }
+        else if (method === 'Makkah') { fajrAngle = 18.5; ishaAngle = 0; }
+        else if (method === 'ISNA') { fajrAngle = 15; ishaAngle = 15; }
+
+        const getHA = (angle) => {
+          const latR = SunCalc.toRad(lat), decR = SunCalc.toRad(dec), angR = SunCalc.toRad(angle);
+          const cosHA = (Math.sin(angR) - Math.sin(latR) * Math.sin(decR)) / (Math.cos(latR) * Math.cos(decR));
+          if (cosHA > 1 || cosHA < -1) return 0;
+          return SunCalc.toDeg(Math.acos(cosHA)) / 15;
+        };
+
+        const getAsrHA = () => {
+          const latR = SunCalc.toRad(lat), decR = SunCalc.toRad(dec);
+          const angle = SunCalc.toDeg(Math.atan(1 + Math.tan(Math.abs(latR - decR))));
+          const cosHA = (Math.sin(SunCalc.toRad(90 - angle)) - Math.sin(latR) * Math.sin(decR)) / (Math.cos(latR) * Math.cos(decR));
+          return SunCalc.toDeg(Math.acos(cosHA)) / 15;
+        };
+
+        const fmt = (h) => {
+          let norm = (h + 24) % 24;
+          const hrs = Math.floor(norm);
+          const mins = Math.floor((norm - hrs) * 60);
+          return `${String(hrs).padStart(2, '0')}:${String(mins).padStart(2, '0')}`;
+        };
+
+        const sunriseH = solarNoon - getHA(-0.833);
+        const sunsetH = solarNoon + getHA(-0.833);
+        const fajrH = solarNoon - getHA(-fajrAngle);
+        const dhuhrH = solarNoon + 0.03;
+        const asrH = solarNoon + getAsrHA();
+        const maghribH = sunsetH + 0.03;
+        const ishaH = (method === 'Makkah') ? maghribH + 1.5 : (solarNoon + getHA(-ishaAngle));
+
+        return {
+          fajr: fmt(fajrH),
+          sunrise: fmt(sunriseH),
+          dhuhr: fmt(dhuhrH),
+          asr: fmt(asrH),
+          maghrib: fmt(maghribH),
+          isha: fmt(ishaH)
+        };
+      }
+    }
+
+    function getDateStr(d) {
+      return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+    }
+
+    // Seed realistic historical data for GitHub Heatmap if not yet populated
+    function seedHeatmapHistory() {
+      const now = new Date();
+      for (let i = 1; i <= 180; i++) {
+        const d = new Date(now);
+        d.setDate(now.getDate() - i);
+        const key = getDateStr(d);
+        if (!todayTracker[key]) {
+          // Pseudo-random deterministic prayer completion based on day index
+          const r = (i * 17 + 5) % 10;
+          if (r >= 2) {
+            todayTracker[key] = {
+              fajr: r > 4 ? 'done-jamaah' : 'done-ontime',
+              dhuhr: 'done-ontime',
+              asr: r > 3 ? 'done-ontime' : 'done-late',
+              maghrib: 'done-jamaah',
+              isha: r > 5 ? 'done-jamaah' : (r === 2 ? 'pending' : 'done-ontime')
+            };
+          } else {
+            todayTracker[key] = {
+              fajr: 'done-late',
+              dhuhr: 'done-ontime',
+              asr: 'done-ontime',
+              maghrib: 'pending',
+              isha: 'pending'
+            };
+          }
+        }
+      }
+    }
+
+    function renderGitHubHeatmap() {
+      const grid = document.getElementById('githubHeatmapGrid');
+      grid.innerHTML = '';
+      const now = new Date();
+      const totalDays = 26 * 7; // 26 weeks (~6 months)
+
+      for (let i = totalDays - 1; i >= 0; i--) {
+        const d = new Date(now);
+        d.setDate(now.getDate() - i);
+        const key = getDateStr(d);
+        const rec = todayTracker[key] || {};
+        const fardIds = ['fajr', 'dhuhr', 'asr', 'maghrib', 'isha'];
+        let count = 0;
+        let jamaahCount = 0;
+
+        fardIds.forEach(id => {
+          if (rec[id] === 'done-ontime' || rec[id] === 'done-jamaah' || rec[id] === 'done-late') count++;
+          if (rec[id] === 'done-jamaah') jamaahCount++;
+        });
+
+        const cell = document.createElement('div');
+        let lvlClass = '';
+        if (count === 5 && jamaahCount >= 3) lvlClass = 'lvl-5';
+        else if (count >= 4) lvlClass = 'lvl-4';
+        else if (count === 3) lvlClass = 'lvl-3';
+        else if (count === 2) lvlClass = 'lvl-2';
+        else if (count === 1) lvlClass = 'lvl-1';
+
+        cell.className = `heatmap-cell ${lvlClass}`.trim();
+        cell.title = `${key}: ${count} من 5 صلوات (${jamaahCount} جماعة)`;
+        cell.addEventListener('mouseenter', () => {
+          document.getElementById('heatmapHoverInfo').innerHTML =
+            `📅 <strong>${key}</strong> — أُديت <strong>${count} من 5</strong> صلوات (${jamaahCount} في جماعة)`;
+        });
+        grid.appendChild(cell);
+      }
+
+      // Today score badge
+      const todayKey = getDateStr(now);
+      const todayRec = todayTracker[todayKey] || {};
+      const todayDone = ['fajr', 'dhuhr', 'asr', 'maghrib', 'isha'].filter(
+        id => todayRec[id] && todayRec[id].startsWith('done-')
+      ).length;
+      document.getElementById('ghTodayScore').innerText = `${todayDone}/5`;
+    }
+
+    function renderPrayerCards() {
+      const container = document.getElementById('prayersCardsContainer');
+      container.innerHTML = '';
+      const today = getDateStr(new Date());
+      if (!todayTracker[today]) {
+        todayTracker[today] = { fajr: 'done-ontime', dhuhr: 'done-jamaah', asr: 'pending', maghrib: 'pending', isha: 'pending' };
+      }
+      const dayData = todayTracker[today];
+      let completedCount = 0;
+
+      PRAYER_NAMES.forEach(p => {
+        const timeStr = currentPrayerTimes ? currentPrayerTimes[p.id] : '--:--';
+        const card = document.createElement('div');
+        card.className = 'prayer-card';
+        card.id = `card-${p.id}`;
+        const isSunrise = p.id === 'sunrise';
+        const currentStatus = dayData[p.id] || 'pending';
+
+        if (!isSunrise && currentStatus.startsWith('done-')) completedCount++;
+
+        let trackerHTML = '';
+        if (!isSunrise) {
+          trackerHTML = `
+            <div class="tracker-status-group">
+              <button class="status-select-btn ${currentStatus === 'done-ontime' ? 'done-ontime' : ''}" onclick="updatePrayerStatus('${p.id}', 'done-ontime')">
+                <span>في وقتها</span><span>${currentStatus === 'done-ontime' ? '✓' : '○'}</span>
+              </button>
+              <button class="status-select-btn ${currentStatus === 'done-jamaah' ? 'done-jamaah' : ''}" onclick="updatePrayerStatus('${p.id}', 'done-jamaah')">
+                <span>صليت جماعة 🌟</span><span>${currentStatus === 'done-jamaah' ? '✓' : '○'}</span>
+              </button>
+              <button class="status-select-btn ${currentStatus === 'done-late' ? 'done-late' : ''}" onclick="updatePrayerStatus('${p.id}', 'done-late')">
+                <span>قضاء متأخر</span><span>${currentStatus === 'done-late' ? '✓' : '○'}</span>
+              </button>
+              <button class="status-select-btn ${currentStatus === 'not-done' ? 'not-done' : ''}" onclick="updatePrayerStatus('${p.id}', 'not-done')">
+                <span>فائتة (+1 للقضاء)</span><span>${currentStatus === 'not-done' ? '✗' : '○'}</span>
+              </button>
+            </div>
+          `;
+        } else {
+          trackerHTML = `<div style="font-size:0.82rem; color:var(--text-muted); text-align:center; padding:12px 0;">انتهاء وقت الفجر وبداية صلاة الضحى</div>`;
+        }
+
+        card.innerHTML = `
+          <div>
+            <div class="prayer-head">
+              <span class="prayer-name">${p.ar}</span>
+              <span>${p.icon}</span>
+            </div>
+            <div class="prayer-time">${timeStr}</div>
+          </div>
+          ${trackerHTML}
+        `;
+        container.appendChild(card);
+      });
+
+      const pct = Math.round((completedCount / 5) * 100);
+      document.getElementById('todayProgressRatio').innerText = `${completedCount} من 5 صلوات (${pct}%)`;
+      document.getElementById('todayProgressBar').style.width = `${pct}%`;
+      renderGitHubHeatmap();
+    }
+
+    window.updatePrayerStatus = function(prayerId, status) {
+      const today = getDateStr(new Date());
+      if (!todayTracker[today]) todayTracker[today] = {};
+      const prevStatus = todayTracker[today][prayerId];
+      todayTracker[today][prayerId] = status;
+
+      // Smart Auto-Sync with Qadaa if marked as 'not-done'
+      if (status === 'not-done' && prevStatus !== 'not-done') {
+        qadaaData.remaining[prayerId] = (qadaaData.remaining[prayerId] || 0) + 1;
+        renderQadaaSection();
+        showToast('تمت الإضافة لسجل الفوائت', `أضيفت صلاة ${getPrayerAr(prayerId)} تلقائياً إلى عداد القضاء (+1)`);
+      } else {
+        showToast('تم تحديث التتبع ومصفوفة GitHub', `تم تحديث حالة صلاة ${getPrayerAr(prayerId)}`);
+      }
+
+      saveState();
+      renderPrayerCards();
+    };
+
+    function getPrayerAr(id) {
+      const f = PRAYER_NAMES.find(p => p.id === id);
+      return f ? f.ar : id;
+    }
+
+    function renderQadaaSection() {
+      const grid = document.getElementById('qadaaCardsGrid');
+      grid.innerHTML = '';
+      let totalRem = 0, totalDone = 0;
+
+      QADAA_KEYS.forEach(item => {
+        const rem = qadaaData.remaining[item.id] || 0;
+        const done = qadaaData.completed[item.id] || 0;
+        totalRem += rem;
+        totalDone += done;
+
+        const card = document.createElement('div');
+        card.className = 'qadaa-card';
+        card.innerHTML = `
+          <div style="font-weight: 700;">${item.ar}</div>
+          <div style="font-size: 0.76rem; color: var(--text-muted);">المتبقية للقضاء</div>
+          <div class="qadaa-counter-display">${rem}</div>
+          <div class="qadaa-controls">
+            <button class="btn-step btn-minus" onclick="modifyQadaa('${item.id}', -1)" title="قضاء صلاة (-)">-</button>
+            <button class="btn-step btn-plus" onclick="modifyQadaa('${item.id}', 1)" title="إضافة فائتة (+)">+</button>
+          </div>
+          <div style="display:flex; justify-content:center; gap:6px; margin-top:8px;">
+            <button class="btn-batch" onclick="modifyQadaa('${item.id}', -5)">-5</button>
+            <button class="btn-batch" onclick="modifyQadaa('${item.id}', 5)">+5</button>
+          </div>
+          <div style="margin-top:10px; font-size:0.78rem; color:var(--accent-emerald);">تم قضاؤه: <strong>${done}</strong></div>
+        `;
+        grid.appendChild(card);
+      });
+
+      document.getElementById('totalRemainingQadaa').innerText = totalRem;
+      document.getElementById('totalDoneQadaa').innerText = totalDone;
+      const target = parseInt(appSettings.dailyQadaaTarget || 5, 10);
+      const days = Math.ceil(totalRem / target);
+      document.getElementById('estimatedFinishDays').innerText = totalRem > 0 ? `${days} يوماً` : 'مكتمل بفضل الله 🎉';
+    }
+
+    window.modifyQadaa = function(prayerId, delta) {
+      if (delta < 0) {
+        const cur = qadaaData.remaining[prayerId] || 0;
+        if (cur > 0) {
+          const step = Math.min(Math.abs(delta), cur);
+          qadaaData.remaining[prayerId] -= step;
+          qadaaData.completed[prayerId] = (qadaaData.completed[prayerId] || 0) + step;
+          showToast('تقبل الله طاعتك!', `تم إنقاص ${step} من فوائت ${prayerId}`);
+        }
+      } else {
+        qadaaData.remaining[prayerId] = (qadaaData.remaining[prayerId] || 0) + delta;
+      }
+      saveState();
+      renderQadaaSection();
+    };
+
+    function renderWeekSchedule() {
+      const tbody = document.getElementById('scheduleTableBody');
+      tbody.innerHTML = '';
+      const now = new Date();
+      const tz = -now.getTimezoneOffset() / 60;
+      const daysAr = ['الأحد', 'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'];
+
+      for (let i = 0; i < 7; i++) {
+        const d = new Date(now);
+        d.setDate(now.getDate() + i);
+        const times = SunCalc.calculateTimes(d, appSettings.lat, appSettings.lng, tz, appSettings.method);
+        const tr = document.createElement('tr');
+        if (i === 0) tr.style.background = 'rgba(16, 185, 129, 0.1)';
+        tr.innerHTML = `
+          <td><strong>${daysAr[d.getDay()]}</strong> <span style="font-size:0.8rem; color:var(--text-muted);">${d.getDate()}/${d.getMonth() + 1}</span></td>
+          <td>${times.fajr}</td>
+          <td>${times.sunrise}</td>
+          <td>${times.dhuhr}</td>
+          <td>${times.asr}</td>
+          <td>${times.maghrib}</td>
+          <td>${times.isha}</td>
+        `;
+        tbody.appendChild(tr);
+      }
+    }
+
+    function updateClockAndCountdown() {
+      const now = new Date();
+      document.getElementById('currentClockDisplay').innerText = now.toLocaleTimeString('ar-EG', { hour12: false });
+      if (!currentPrayerTimes) return;
+
+      const curMins = now.getHours() * 60 + now.getMinutes() + now.getSeconds() / 60;
+      const order = [
+        { id: 'fajr', ar: 'الفجر', mood: '🌌 أجواء الفجر والسكينة - الصلاة خير من النوم' },
+        { id: 'sunrise', ar: 'الشروق', mood: '🌅 إشراق الصباح وأذكار البكور' },
+        { id: 'dhuhr', ar: 'الظهر', mood: '☀️ أجواء الظهيرة - استعن بالصلاة على عملك' },
+        { id: 'asr', ar: 'العصر', mood: '🌤️ أجواء العصر - حافظوا على الصلوات والصلاة الوسطى' },
+        { id: 'maghrib', ar: 'المغرب', mood: '🌇 غروب الشمس وأذكار المساء' },
+        { id: 'isha', ar: 'العشاء', mood: '🌙 سكون الليل وقيام المتهجدين' }
+      ];
+
+      let nextP = null, nextM = 0, activeIdx = 5;
+      for (let i = 0; i < order.length; i++) {
+        const [h, m] = currentPrayerTimes[order[i].id].split(':').map(Number);
+        const pm = h * 60 + m;
+        if (pm > curMins) {
+          nextP = order[i];
+          nextM = pm;
+          activeIdx = (i > 0) ? i - 1 : 5;
+          break;
+        }
+      }
+      if (!nextP) {
+        nextP = order[0];
+        const [h, m] = currentPrayerTimes['fajr'].split(':').map(Number);
+        nextM = 24 * 60 + h * 60 + m;
+        activeIdx = 5;
+      }
+
+      document.getElementById('nextPrayerName').innerText = `صلاة ${nextP.ar}`;
+      document.getElementById('skyMoodText').innerText = order[activeIdx].mood;
+
+      document.querySelectorAll('.prayer-card').forEach(c => c.classList.remove('current'));
+      const activeCard = document.getElementById(`card-${order[activeIdx].id}`);
+      if (activeCard) activeCard.classList.add('current');
+
+      const diffSecs = Math.max(0, Math.floor((nextM - curMins) * 60));
+      const hrs = Math.floor(diffSecs / 3600);
+      const mins = Math.floor((diffSecs % 3600) / 60);
+      const secs = diffSecs % 60;
+      document.getElementById('nextPrayerCountdown').innerText =
+        `${String(hrs).padStart(2, '0')}:${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+    }
+
+    function showVerseModal(quoteObj) {
+      const q = quoteObj || INSPIRATIONAL_QUOTES[Math.floor(Math.random() * INSPIRATIONAL_QUOTES.length)];
+      currentQuoteIndex = INSPIRATIONAL_QUOTES.indexOf(q);
+      document.getElementById('modalContentTypeBadge').innerText = `✨ ${q.type}`;
+      document.getElementById('modalTextArabic').innerText = `"${q.text}"`;
+      document.getElementById('modalTafsirText').innerText = `💡 فائدة وتدبر: ${q.tafsir}`;
+      document.getElementById('modalSourceText').innerText = q.source;
+      document.getElementById('verseModal').classList.add('show');
+    }
+
+    window.showVerseByCategory = function(cat) {
+      const filtered = INSPIRATIONAL_QUOTES.filter(q => q.category === cat);
+      showVerseModal(filtered[Math.floor(Math.random() * filtered.length)]);
+    };
+
+    function showToast(title, msg) {
+      const box = document.getElementById('toastBox');
+      document.getElementById('toastTitle').innerText = title;
+      document.getElementById('toastMessage').innerText = msg;
+      box.classList.add('show');
+      setTimeout(() => box.classList.remove('show'), 3800);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      loadState();
+      seedHeatmapHistory();
+      const now = new Date();
+      const tz = -now.getTimezoneOffset() / 60;
+      currentPrayerTimes = SunCalc.calculateTimes(now, appSettings.lat, appSettings.lng, tz, appSettings.method);
+
+      renderPrayerCards();
+      renderQadaaSection();
+      renderWeekSchedule();
+
+      // Tabs
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+          document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+          btn.classList.add('active');
+          document.getElementById(`tab-${btn.getAttribute('data-tab')}`).classList.add('active');
+        });
+      });
+
+      // Qadaa bulk actions & target planner
+      document.getElementById('qadaaDailyTargetSelect').addEventListener('change', (e) => {
+        appSettings.dailyQadaaTarget = parseInt(e.target.value, 10);
+        saveState();
+        renderQadaaSection();
+      });
+
+      document.getElementById('btnAddFullMissedDay').addEventListener('click', () => {
+        ['fajr', 'dhuhr', 'asr', 'maghrib', 'isha'].forEach(id => {
+          qadaaData.remaining[id] = (qadaaData.remaining[id] || 0) + 1;
+        });
+        saveState();
+        renderQadaaSection();
+        showToast('تمت إضافة يوم كامل', 'أضيفت 5 صلوات (يوم كامل) إلى عداد الفوائت');
+      });
+
+      document.getElementById('btnCompleteFullDay').addEventListener('click', () => {
+        ['fajr', 'dhuhr', 'asr', 'maghrib', 'isha'].forEach(id => {
+          if ((qadaaData.remaining[id] || 0) > 0) {
+            qadaaData.remaining[id]--;
+            qadaaData.completed[id] = (qadaaData.completed[id] || 0) + 1;
+          }
+        });
+        saveState();
+        renderQadaaSection();
+        showToast('تقبل الله منك!', 'تم تسجيل قضاء يوم كامل (5 فروض)');
+      });
+
+      document.getElementById('btnResetQadaaModal').addEventListener('click', () => {
+        if (confirm('هل تود تصفير جميع عدادات القضاء؟')) {
+          QADAA_KEYS.forEach(k => { qadaaData.remaining[k.id] = 0; qadaaData.completed[k.id] = 0; });
+          saveState();
+          renderQadaaSection();
+        }
+      });
+
+      // Modals
+      document.getElementById('btnShowInspireCard').addEventListener('click', () => showVerseModal());
+      document.getElementById('openVerseModalBtn').addEventListener('click', () => showVerseModal());
+      document.getElementById('closeVerseModal').addEventListener('click', () => document.getElementById('verseModal').classList.remove('show'));
+      document.getElementById('btnNextVerse').addEventListener('click', () => showVerseModal());
+      document.getElementById('btnCopyVerse').addEventListener('click', () => {
+        const q = INSPIRATIONAL_QUOTES[currentQuoteIndex] || INSPIRATIONAL_QUOTES[0];
+        navigator.clipboard.writeText(`${q.text}
+${q.tafsir}
+(${q.source})`);
+        showToast('تم النسخ', 'نسخ النص مع التفسير والمصدر إلى الحافظة');
+      });
+
+      // Khushu Focus Modal
+      let khushuInterval = null;
+      document.getElementById('openKhushuBtn').addEventListener('click', () => document.getElementById('khushuModal').classList.add('show'));
+      document.getElementById('closeKhushuModal').addEventListener('click', () => {
+        clearInterval(khushuInterval);
+        document.getElementById('khushuModal').classList.remove('show');
+      });
+      document.getElementById('btnStartKhushuTimer').addEventListener('click', () => {
+        let secs = 300;
+        clearInterval(khushuInterval);
+        khushuInterval = setInterval(() => {
+          secs--;
+          const m = Math.floor(secs / 60), s = secs % 60;
+          document.getElementById('khushuTimerDisplay').innerText = `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+          if (secs <= 0) clearInterval(khushuInterval);
+        }, 1000);
+      });
+
+      // Settings Modal
+      document.getElementById('openSettingsBtn').addEventListener('click', () => document.getElementById('settingsModal').classList.add('show'));
+      document.getElementById('closeSettingsModal').addEventListener('click', () => document.getElementById('settingsModal').classList.remove('show'));
+      document.getElementById('btnSaveSettings').addEventListener('click', () => {
+        appSettings.city = document.getElementById('settingCityName').value;
+        appSettings.lat = parseFloat(document.getElementById('settingLat').value);
+        appSettings.lng = parseFloat(document.getElementById('settingLng').value);
+        appSettings.method = document.getElementById('settingMethod').value;
+        saveState();
+        document.getElementById('locationCityBadge').innerText = `📍 ${appSettings.city}`;
+        currentPrayerTimes = SunCalc.calculateTimes(new Date(), appSettings.lat, appSettings.lng, tz, appSettings.method);
+        renderPrayerCards();
+        renderWeekSchedule();
+        document.getElementById('settingsModal').classList.remove('show');
+        showToast('تم الحفظ', 'تم تحديث المواقيت الفلكية بنجاح');
+      });
+
+      // Tasbeeh
+      const trigger = document.getElementById('tasbeehTrigger');
+      trigger.addEventListener('click', () => {
+        tasbeehData.count++;
+        tasbeehData.total++;
+        document.getElementById('tasbeehCountDisplay').innerText = tasbeehData.count;
+        document.getElementById('tasbeehSessionTotal').innerText = `مجموع التسبيحات: ${tasbeehData.total}`;
+        saveState();
+      });
+
+      document.querySelectorAll('.chip-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('.chip-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          tasbeehData.phrase = btn.getAttribute('data-phrase');
+          tasbeehData.count = 0;
+          document.getElementById('tasbeehCurrentPhrase').innerText = tasbeehData.phrase;
+          document.getElementById('tasbeehCountDisplay').innerText = '0';
+        });
+      });
+
+      document.getElementById('btnResetTasbeeh').addEventListener('click', () => {
+        tasbeehData.count = 0;
+        document.getElementById('tasbeehCountDisplay').innerText = '0';
+      });
+
+      setInterval(updateClockAndCountdown, 1000);
+      updateClockAndCountdown();
+    });
+  </script>
+</body>
+</html>
